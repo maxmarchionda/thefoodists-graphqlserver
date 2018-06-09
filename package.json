@@ -1,0 +1,34 @@
+{
+  "name": "thefoodists-graphqlserver",
+  "version": "1.0.0",
+  "description": "Server for (thefoodists.app)",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon src/server.js --watch src --exec babel-node",
+    "build": "babel src -d dist",
+    "serve": "node dist/server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/quantumArcade/thefoodists-graphqlserver.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/quantumArcade/thefoodists-graphqlserver/issues"
+  },
+  "homepage": "https://github.com/quantumArcade/thefoodists-graphqlserver#readme",
+  "dependencies": {
+    "apollo-engine": "^1.1.2",
+    "apollo-server": "^2.0.0-beta.5",
+    "babel-preset-env": "^1.7.0",
+    "dotenv": "^6.0.0",
+    "graphql": "^0.13.2",
+    "graphql-tag": "^2.9.2",
+    "require-graphql-file": "^1.0.1"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0"
+  }
+}

@@ -1,6 +1,8 @@
 import { ApolloServer } from 'apollo-server';
 import { ApolloEngine } from "apollo-engine";
 import bodyParser from "body-parser";
+require("babel-core/register");
+require("babel-polyfill");
 require('dotenv').config();
 
 if (!process.env.ENGINE_API_KEY) {

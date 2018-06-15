@@ -10,6 +10,8 @@ var _startSchema = require('./startSchema');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+require("babel-core/register");
+require("babel-polyfill");
 require('dotenv').config();
 
 var MONGO_URL = process.env.MONGO_URL;

@@ -30,26 +30,26 @@ var startSchema = exports.startSchema = function startSchema() {
     var customizationOptions = {}; // left it empty for simplicity, described below
     var PostTC = (0, _graphqlComposeMongoose.composeWithMongoose)(PostModel, customizationOptions);
 
-    // STEP 3: CREATE CRAZY GraphQL SCHEMA WITH ALL CRUD USER OPERATIONS
+    // STEP 3: CREATE CRAZY GraphQL SCHEMA WITH ALL CRUD post OPERATIONS
     // via graphql-compose it will be much much easier, with less typing
     _graphqlCompose.schemaComposer.rootQuery().addFields({
-      userById: PostTC.getResolver('findById'),
-      userByIds: PostTC.getResolver('findByIds'),
-      userOne: PostTC.getResolver('findOne'),
-      userMany: PostTC.getResolver('findMany'),
-      userCount: PostTC.getResolver('count'),
-      userConnection: PostTC.getResolver('connection'),
-      userPagination: PostTC.getResolver('pagination')
+      postById: PostTC.getResolver('findById'),
+      postByIds: PostTC.getResolver('findByIds'),
+      postOne: PostTC.getResolver('findOne'),
+      postMany: PostTC.getResolver('findMany'),
+      postCount: PostTC.getResolver('count'),
+      postConnection: PostTC.getResolver('connection'),
+      postPagination: PostTC.getResolver('pagination')
     });
 
     _graphqlCompose.schemaComposer.rootMutation().addFields({
-      userCreate: PostTC.getResolver('createOne'),
-      userUpdateById: PostTC.getResolver('updateById'),
-      userUpdateOne: PostTC.getResolver('updateOne'),
-      userUpdateMany: PostTC.getResolver('updateMany'),
-      userRemoveById: PostTC.getResolver('removeById'),
-      userRemoveOne: PostTC.getResolver('removeOne'),
-      userRemoveMany: PostTC.getResolver('removeMany')
+      postCreate: PostTC.getResolver('createOne'),
+      postUpdateById: PostTC.getResolver('updateById'),
+      postUpdateOne: PostTC.getResolver('updateOne'),
+      postUpdateMany: PostTC.getResolver('updateMany'),
+      postRemoveById: PostTC.getResolver('removeById'),
+      postRemoveOne: PostTC.getResolver('removeOne'),
+      postRemoveMany: PostTC.getResolver('removeMany')
     });
   } catch (e) {
     console.log(e);

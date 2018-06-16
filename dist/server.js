@@ -14,13 +14,13 @@ require("babel-core/register");
 require("babel-polyfill");
 require('dotenv').config();
 
-var MONGO_URL = process.env.MONGO_URL;
+var MONGODB_URI = process.env.MONGODB_URI;
 
-if (!process.env.MONGO_URL) {
-  throw new Error("PLease provide a mongo URL for db connection in MONGO_URL.");
+if (!process.env.MONGODB_URI) {
+  throw new Error("PLease provide a mongo URL for db connection in MONGODB_URI.");
 }
 
-_mongoose2.default.connect(MONGO_URL);
+_mongoose2.default.connect(MONGODB_URI);
 _mongoose2.default.connection.on('error', function () {
   throw new Error('Error connecting to MongoDB');
 });

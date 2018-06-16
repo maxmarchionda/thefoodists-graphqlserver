@@ -10,7 +10,7 @@ const MONGODB_URI = process.env.MONGODB_URI;
 
 if (!process.env.MONGODB_URI) {
   throw new Error(
-    "PLease provide a mongo URL for db connection in MONGO_URL."
+    "PLease provide a mongo URL for db connection in MONGODB_URI."
   );
 }
 

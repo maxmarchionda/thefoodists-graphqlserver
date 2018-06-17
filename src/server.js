@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 import { startServer } from './startServer';
 import { startSchema } from './startSchema';
 
-require("babel-core/register");
+// require("babel-core/register");
 require("babel-polyfill");
 require('dotenv').config();
 

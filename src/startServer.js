@@ -13,12 +13,13 @@ if (!process.env.ENGINE_API_KEY) {
   console.log("WARN -- using default port --");
 }
 
-const PORT = process.env.PORT || 4000;
+const PORT = process.env.PORT || 3000;
 
 export const startServer = async (schema) => {
   try {
 
     const server = new ApolloServer({
+      port: PORT,
       schema,
       engine: true
     });

@@ -1,6 +1,11 @@
 import { ApolloServer } from 'apollo-server';
 import { ApolloEngine } from "apollo-engine";
 import bodyParser from "body-parser";
+
+import express from 'express';
+import { graphqlExpress, graphiqlExpress } from 'apollo-server-express';
+import http from 'http';
+import https from 'https';
 // require("babel-core/register");
 require("babel-polyfill");
 require('dotenv').config();
@@ -18,15 +23,27 @@ const PORT = process.env.PORT || 3000;
 export const startServer = async (schema) => {
   try {
 
-    const server = new ApolloServer({
-      port: PORT,
-      schema,
-      engine: true
+
+    const app = express();
+
+// bodyParser is needed just for POST.
+    app.use('/graphql', bodyParser.json(), graphqlExpress({ schema }));
+    app.get('/graphiql', graphiqlExpress({ endpointURL: '/graphql' })); // if you want GraphiQL enabled
+    const server = app.listen(process.env.PORT || 3000, function () {
+      var port = server.address().port;
+      console.log("App now running on port", port);
     });
 
-    server.listen().then(({ url }) => {
-      console.log(`🚀  Server ready at ${url}`);
-    });
+
+    // const server = new ApolloServer({
+    //   port: PORT,
+    //   schema,
+    //   engine: true
+    // });
+    //
+    // server.listen().then(({ url }) => {
+    //   console.log(`🚀  Server ready at ${url}`);
+    // });
 
   } catch (e) {
     console.log(e);

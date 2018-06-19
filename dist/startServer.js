@@ -27,7 +27,7 @@ if (!process.env.ENGINE_API_KEY) {
   console.log("WARN -- using default port --");
 }
 
-var PORT = process.env.PORT || 4000;
+var PORT = process.env.PORT || 3000;
 
 var startServer = exports.startServer = function () {
   var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(schema) {
@@ -38,6 +38,7 @@ var startServer = exports.startServer = function () {
           case 0:
             try {
               server = new _apolloServer.ApolloServer({
+                port: PORT,
                 schema: schema,
                 engine: true
               });

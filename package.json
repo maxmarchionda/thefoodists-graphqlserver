@@ -36,6 +36,7 @@
     "graphql": "^0.13.2",
     "graphql-compose": "^4.3.1",
     "graphql-compose-mongoose": "^4.1.1",
+    "graphql-playground-middleware-express": "^1.7.0",
     "graphql-tag": "^2.9.2",
     "mongoose": "^5.1.5"
   },

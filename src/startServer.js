@@ -3,9 +3,8 @@ import { ApolloEngine } from "apollo-engine";
 import bodyParser from "body-parser";
 
 import express from 'express';
-import { graphqlExpress, graphiqlExpress } from 'apollo-server-express';
-import http from 'http';
-import https from 'https';
+import { graphqlExpress } from 'apollo-server-express';
+import expressPlayground from 'graphql-playground-middleware-express';
 // require("babel-core/register");
 require("babel-polyfill");
 require('dotenv').config();
@@ -28,7 +27,7 @@ export const startServer = async (schema) => {
 
 // bodyParser is needed just for POST.
     app.use('/graphql', bodyParser.json(), graphqlExpress({ schema }));
-    app.get('/graphiql', graphiqlExpress({ endpointURL: '/graphql' })); // if you want GraphiQL enabled
+    app.get('/', expressPlayground({ endpoint: '/graphql' }))
     const server = app.listen(process.env.PORT || 3000, function () {
       var port = server.address().port;
       console.log("App now running on port", port);

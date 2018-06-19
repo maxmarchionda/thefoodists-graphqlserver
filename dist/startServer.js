@@ -19,13 +19,9 @@ var _express2 = _interopRequireDefault(_express);
 
 var _apolloServerExpress = require("apollo-server-express");
 
-var _http = require("http");
+var _graphqlPlaygroundMiddlewareExpress = require("graphql-playground-middleware-express");
 
-var _http2 = _interopRequireDefault(_http);
-
-var _https = require("https");
-
-var _https2 = _interopRequireDefault(_https);
+var _graphqlPlaygroundMiddlewareExpress2 = _interopRequireDefault(_graphqlPlaygroundMiddlewareExpress);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -56,7 +52,7 @@ var startServer = exports.startServer = function () {
               // bodyParser is needed just for POST.
 
               app.use('/graphql', _bodyParser2.default.json(), (0, _apolloServerExpress.graphqlExpress)({ schema: schema }));
-              app.get('/graphiql', (0, _apolloServerExpress.graphiqlExpress)({ endpointURL: '/graphql' })); // if you want GraphiQL enabled
+              app.get('/', (0, _graphqlPlaygroundMiddlewareExpress2.default)({ endpoint: '/graphql' }));
               server = app.listen(process.env.PORT || 3000, function () {
                 var port = server.address().port;
                 console.log("App now running on port", port);

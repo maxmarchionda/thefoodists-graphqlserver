@@ -41,7 +41,7 @@ var PORT = process.env.PORT || 3000;
 
 var startServer = exports.startServer = function () {
   var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(schema) {
-    var app, server;
+    var app, engine, port;
     return regeneratorRuntime.wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
@@ -51,12 +51,31 @@ var startServer = exports.startServer = function () {
 
               // bodyParser is needed just for POST.
 
-              app.use('/graphql', _bodyParser2.default.json(), (0, _apolloServerExpress.graphqlExpress)({ schema: schema }));
+              app.use('/graphql', _bodyParser2.default.json(), (0, _apolloServerExpress.graphqlExpress)({
+                schema: schema,
+                tracing: true,
+                cacheControl: true
+              }));
               app.get('/', (0, _graphqlPlaygroundMiddlewareExpress2.default)({ endpoint: '/graphql' }));
-              server = app.listen(process.env.PORT || 3000, function () {
-                var port = server.address().port;
-                console.log("App now running on port", port);
+
+              engine = new _apolloEngine.ApolloEngine({
+                apiKey: process.env.ENGINE_API_KEY
               });
+
+              // Call engine.listen instead of app.listen(port)
+
+              port = process.env.PORT || 3000;
+
+              engine.listen({
+                port: port,
+                expressApp: app
+              });
+              console.log('GraphQL Server now running on', 'http://localhost:' + port);
+              // const server = app.listen(process.env.PORT || 3000, function () {
+              //   var port = server.address().port;
+              //   console.log("App now running on port", port);
+              // });
+
 
               // const server = new ApolloServer({
               //   port: PORT,

@@ -26,12 +26,28 @@ export const startServer = async (schema) => {
     const app = express();
 
 // bodyParser is needed just for POST.
-    app.use('/graphql', bodyParser.json(), graphqlExpress({ schema }));
+    app.use('/graphql', bodyParser.json(), graphqlExpress({
+      schema,
+      tracing: true,
+      cacheControl: true
+    }));
     app.get('/', expressPlayground({ endpoint: '/graphql' }))
-    const server = app.listen(process.env.PORT || 3000, function () {
-      var port = server.address().port;
-      console.log("App now running on port", port);
+
+    const engine = new ApolloEngine({
+      apiKey: process.env.ENGINE_API_KEY
     });
+
+    // Call engine.listen instead of app.listen(port)
+    const port = (process.env.PORT || 3000);
+    engine.listen({
+      port,
+      expressApp: app,
+    });
+    console.log('GraphQL Server now running on', 'http://localhost:'+port);
+    // const server = app.listen(process.env.PORT || 3000, function () {
+    //   var port = server.address().port;
+    //   console.log("App now running on port", port);
+    // });
 
 
     // const server = new ApolloServer({
